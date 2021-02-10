@@ -20,8 +20,16 @@ const GameScreen = (props) => {
     generateRandomBetween(1, 100, props.userChoise)
   );
 
+  const [rounds, setRounds] = useState(0);
   const currentLow = useRef(1);
   const currentHigh = useRef(100);
+
+  const { userChoise, onGameOver } = props;
+  useEffect(() => {
+    if (currentGuess === userChoise) {
+      onGameOver(rounds);
+    }
+  }, [currentGuess, userChoise, onGameOver]);
 
   //Validate which number is correct,or too low/high
   const nextGuessHandler = (direction) => {
@@ -45,6 +53,7 @@ const GameScreen = (props) => {
       currentGuess
     );
     setCurrrentGuess(nextNumber);
+    setRounds((curRounds) => curRounds + 1);
   };
 
   return (
