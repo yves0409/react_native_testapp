@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import { View, Text, StyleSheet, Button, Alert } from "react-native";
+import { View, Text, StyleSheet, Button, Alert, Image } from "react-native";
 import Card from "../components/Card";
 import NumberContainer from "../components/NumberContainer";
+import DefaultStyles from "../constants/default-styles";
 
 //generte random number
 const generateRandomBetween = (min, max, exclude) => {
@@ -58,7 +59,7 @@ const GameScreen = (props) => {
 
   return (
     <View style={styles.screen}>
-      <Text>Computer's guess</Text>
+      <Text style={DefaultStyles.title}>Computer's guess</Text>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card style={styles.buttonContainer}>
         <Button title="LOWER" onPress={nextGuessHandler.bind(this, "lower")} />
@@ -67,6 +68,15 @@ const GameScreen = (props) => {
           onPress={nextGuessHandler.bind(this, "greater")}
         />
       </Card>
+      <View style={styles.imageContainer}>
+        <Image
+          source={{
+            uri:
+              "https://picon.ngfiles.com/697000/flash_697047_largest_crop.png?f1601050951",
+          }}
+          style={styles.image}
+        />
+      </View>
     </View>
   );
 };
@@ -83,6 +93,19 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: 300,
     maxWidth: "80%",
+  },
+  imageContainer: {
+    width: 300,
+    height: 300,
+    borderRadius: 150,
+    borderWidth: 3,
+    borderColor: "black",
+    overflow: "hidden",
+    marginVertical: 30,
+  },
+  image: {
+    width: "100%",
+    height: "100%",
   },
 });
 
